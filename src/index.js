@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import {createStore} from "redux";
+import { Provider } from "react-redux";
+import reduer from './reducers'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(reduer);
+
+ReactDOM.render(<Provider store = {store}><App /></Provider>, document.getElementById('root'));
