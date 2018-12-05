@@ -5,7 +5,18 @@ class Todo extends Component {
 
   toggleItem = () => {
     const originTodo = this.props.todo;
-    this.props.toggleItem({ id: originTodo.id, content: originTodo.content, status: !originTodo.status});
+    fetch("http://localhost:8080/api/todos/" + originTodo.id, {
+        method: 'PATCH', 
+        headers: new Headers({
+              'Content-Type': 'application/json'
+          }),
+          mode: 'cors',
+          body: JSON.stringify({status: originTodo.status === 'active'? 'completed': 'active'})})
+    .then(res => res.json())
+    .then(res => {
+        this.props.toggleItem({ id: originTodo.id, content: originTodo.content, status: originTodo.status === 'active'? 'completed': 'active'});
+      }
+    );
   }
 
   render() {
