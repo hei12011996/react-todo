@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { connect } from "react-redux";
 
-class Todo extends Component {
+export default class Todo extends Component {
 
   toggleItem = () => {
     const originTodo = this.props.todo;
@@ -20,29 +19,10 @@ class Todo extends Component {
   }
 
   render() {
-    let todoItem;
-    if (this.props.todo.status === 'active') {
-      todoItem = <li id={this.props.todo.id} onClick={this.toggleItem} >{this.props.todo.content}</li>
-    } else {
-      todoItem = <li id={this.props.todo.id} onClick={this.toggleItem} style={{textDecoration: 'line-through'}}>{this.props.todo.content}</li>
-    }
     return (
       <div>
-        {todoItem}
+        <li id={this.props.todo.id} onClick={this.toggleItem} style={{textDecoration: this.props.todo.status === 'completed'? 'line-through' : 'none'}}>{this.props.todo.content}</li>
       </div>
     )
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  toggleItem: dotoItem => {
-    dispatch({
-      type: "TOGGLE_ITEM",
-      payload: dotoItem
-    });
-  }
-});
-
-connect(null, mapDispatchToProps)(Todo)
-
-export default connect(null, mapDispatchToProps)(Todo)

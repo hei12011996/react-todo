@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Todo from "./Todo.js";
+import TodoContainer from "../containers/TodoContainer.js";
 
 export default class Todos extends Component {
 
@@ -14,7 +14,7 @@ export default class Todos extends Component {
   render() {
     return (
       <div>
-        {this.props.todos.map((todo) => <Todo todo={todo}/> )}
+        {this.props.todos.map((todo) => <TodoContainer todo={todo}/> )}
       </div>
     )
   }
