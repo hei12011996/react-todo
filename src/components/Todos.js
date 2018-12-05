@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import Todo from "./Todo.js";
-import { connect } from "react-redux";
 
-class Todos extends Component {
+export default class Todos extends Component {
+
+  componentWillMount() {
+    fetch("http://localhost:8080/api/todos/search/statusOfTodos?status=completed,active", {
+          method: 'GET',
+          mode: 'cors'})
+    .then(res => res.json())
+    .then(res => this.props.initialDataLoad(res._embedded.todos));
+  }
 
   render() {
     return (
@@ -12,11 +19,3 @@ class Todos extends Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  todos: state.todos
-});
-
-connect(mapStateToProps)(Todos)
-
-export default connect(mapStateToProps)(Todos)

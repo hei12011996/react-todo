@@ -14,7 +14,7 @@ class Todo extends Component {
           body: JSON.stringify({status: originTodo.status === 'active'? 'completed': 'active'})})
     .then(res => res.json())
     .then(res => {
-        this.props.toggleItem({ id: originTodo.id, content: originTodo.content, status: originTodo.status === 'active'? 'completed': 'active'});
+        this.props.toggleItem(res);
       }
     );
   }
