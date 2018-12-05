@@ -4,16 +4,10 @@ import Todos from './Todos'
 import { connect } from "react-redux";
 
 class TodoList extends Component {
-  addNewTodo = newTodo => {
-    this.props.dispatch({
-      type: "ADD_NEW_TODO",
-      payload: newTodo
-    });
-  }
   render() {
     return (
       <div>
-        <TodoInput onNewTodoAdded={this.addNewTodo}/>
+        <TodoInput onNewTodoAdded={this.props.addNewTodo}/>
         <Todos todos={this.props.todos}/>
       </div>
     )
@@ -24,6 +18,15 @@ const mapStateToProps = state => ({
   todos: state.todos
 });
 
-connect(mapStateToProps)(TodoList)
+const mapDispatchToProps = dispatch => ({
+  addNewTodo: newTodo => {
+    dispatch({
+      type: "ADD_NEW_TODO",
+      payload: newTodo
+    });
+  }
+})
 
-export default connect(mapStateToProps)(TodoList)
+connect(mapStateToProps, mapDispatchToProps)(TodoList)
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
