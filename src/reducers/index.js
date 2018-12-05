@@ -1,15 +1,19 @@
 const initialState = { 
-  todos: []
+  todos: [],
+  isFilterActive: false
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
 
     case "INITIAL_DATA_LOAD":
-      return { todos: payload };
+      return { ...state, todos: payload };
+
+    case "UPDATE_FILTER":
+      return { ...state, isFilterActive: payload };
 
     case "ADD_NEW_TODO":
-      return { todos: state.todos.concat(payload) };
+      return { ...state, todos: state.todos.concat(payload) };
 
     case "TOGGLE_ITEM":
       let newTodos = state.todos.map(item => {
@@ -19,7 +23,7 @@ export default (state = initialState, { type, payload }) => {
           return item;
         }
       });
-      return { todos: newTodos };
+      return { ...state, todos: newTodos };
 
     default:
       return state;

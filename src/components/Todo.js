@@ -14,6 +14,7 @@ export default class Todo extends Component {
     .then(res => res.json())
     .then(res => {
         this.props.toggleItem(res);
+        this.props.filterByActive(this.props.isFilterActive);
       }
     );
   }
