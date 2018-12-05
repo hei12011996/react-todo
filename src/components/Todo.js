@@ -9,9 +9,8 @@ class Todo extends Component {
   }
 
   render() {
-    console.log("XXX");
     let todoItem;
-    if (!this.props.todo.status) {
+    if (this.props.todo.status === 'active') {
       todoItem = <li id={this.props.todo.id} onClick={this.toggleItem} >{this.props.todo.content}</li>
     } else {
       todoItem = <li id={this.props.todo.id} onClick={this.toggleItem} ><s>{this.props.todo.content}</s></li>
