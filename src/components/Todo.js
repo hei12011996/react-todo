@@ -20,9 +20,9 @@ export default class Todo extends Component {
 
   render() {
     return (
-      <div>
+      <ul>
         <li id={this.props.todo.id} onClick={this.toggleItem} style={{textDecoration: this.props.todo.status === 'completed'? 'line-through' : 'none'}}>{this.props.todo.content}</li>
-      </div>
+      </ul>
     )
   }
 }
