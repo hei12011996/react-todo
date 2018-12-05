@@ -5,7 +5,13 @@ class Todos extends Component {
   render() {
     return (
       <div>
-        {this.props.todos.map((todo, i) => <li key={i}>{todo}</li>)}
+        {this.props.todos.map((todo, i) => {
+          if (!todo.status) {
+            return <li key={todo.id} >{todo.content}</li>
+          } else {
+            return <li key={todo.id} ><s>{todo.content}</s></li>
+          }
+        })}
       </div>
     )
   }
