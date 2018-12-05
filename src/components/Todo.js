@@ -24,7 +24,7 @@ class Todo extends Component {
     if (this.props.todo.status === 'active') {
       todoItem = <li id={this.props.todo.id} onClick={this.toggleItem} >{this.props.todo.content}</li>
     } else {
-      todoItem = <li id={this.props.todo.id} onClick={this.toggleItem} ><s>{this.props.todo.content}</s></li>
+      todoItem = <li id={this.props.todo.id} onClick={this.toggleItem} style={{textDecoration: 'line-through'}}>{this.props.todo.content}</li>
     }
     return (
       <div>
