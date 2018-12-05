@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 
-export default class TodoInput extends Component {
+class TodoInput extends Component {
   dispatch = () => {
-    const {input} = this.refs
-    this.props.onNewTodoAdded(input.value)
-    input.value = ''
+    this.props.addNewTodo(this.refs.input.value);
+    this.refs.input.value = '';
   }
   render() {
     return (
@@ -15,3 +15,16 @@ export default class TodoInput extends Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  addNewTodo: newTodo => {
+    dispatch({
+      type: "ADD_NEW_TODO",
+      payload: newTodo
+    });
+  }
+})
+
+connect(null, mapDispatchToProps)(TodoInput)
+
+export default connect(null, mapDispatchToProps)(TodoInput)
