@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
+import Todo from "./Todo.js";
 import { connect } from "react-redux";
 
 class Todos extends Component {
+
   render() {
     return (
       <div>
-        {this.props.todos.map((todo, i) => {
-          if (!todo.status) {
-            return <li key={todo.id} >{todo.content}</li>
-          } else {
-            return <li key={todo.id} ><s>{todo.content}</s></li>
-          }
-        })}
+        {this.props.todos.map((todo) => <Todo todo={todo}/> )}
       </div>
     )
   }
