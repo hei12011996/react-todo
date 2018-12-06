@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
+import TodosResource from "../resources/TodosResource"
 
 export default class Todo extends Component {
 
   toggleItem = () => {
-    const originTodo = this.props.todo;
-    fetch("http://localhost:8080/api/todos/" + originTodo.id, {
-        method: 'PATCH', 
-        headers: new Headers({
-              'Content-Type': 'application/json'
-          }),
-          mode: 'cors',
-          body: JSON.stringify({status: originTodo.status === 'active'? 'completed': 'active'})})
+    const id = this.props.todo.id;
+    const newStatus = this.props.todo.status === 'active'? 'completed': 'active';
+    TodosResource.updateStatus(id, newStatus)
     .then(res => res.json())
     .then(res => {
         this.props.toggleItem(res);

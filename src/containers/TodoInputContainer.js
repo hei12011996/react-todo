@@ -1,5 +1,6 @@
 import TodoInput from "../components/TodoInput";
 import { connect } from "react-redux";
+import TodosResource from "../resources/TodosResource"
 
 const mapStateToProps = state => ({
   isFilterActive: state.isFilterActive
@@ -7,13 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addNewTodo: newTodo => {
-    fetch("http://localhost:8080/api/todos", {
-        method: 'POST', 
-        headers: new Headers({
-              'Content-Type': 'application/json'
-          }),
-          mode: 'cors',
-          body: JSON.stringify({content: newTodo, status: 'active'})})
+    TodosResource.add({content: newTodo, status: 'active'})
     .then(res => res.json())
     .then(res => {
         dispatch({
@@ -32,10 +27,8 @@ const mapDispatchToProps = dispatch => ({
   },
 
   filterByActive: (checked) => {
-    let url = checked === true ? '' : ',completed';
-    fetch("http://localhost:8080/api/todos/search/statusOfTodos?status=active" + url , {
-          method: 'GET',
-          mode: 'cors'})
+    let status = checked === true ? 'active' : 'active,completed';
+    TodosResource.getByStatus(status)
     .then(res => res.json())
     .then(res => 
         dispatch({
